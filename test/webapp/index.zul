@@ -1,0 +1,14 @@
+<jqplot id="linechart" title="Line Chart Demo" type="line" width="600px" height="250px">
+	<zscript><![CDATA[
+	CategoryModel catmodel = new SimpleCategoryModel();
+	catmodel.setValue("2001", "Q1", new Integer(20));
+	catmodel.setValue("2001", "Q2", new Integer(35));
+	catmodel.setValue("2001", "Q3", new Integer(40));
+	catmodel.setValue("2001", "Q4", new Integer(55));
+	catmodel.setValue("2002", "Q1", new Integer(40));
+	catmodel.setValue("2002", "Q2", new Integer(60));
+	catmodel.setValue("2002", "Q3", new Integer(70));
+	catmodel.setValue("2002", "Q4", new Integer(90));
+	linechart.setModel(catmodel);
+]]></zscript>
+</jqplot>

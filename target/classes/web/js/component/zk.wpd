@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="component" language="xul/html">
+	<widget name="Jqplot" />
+	<script src="ext/jquery.jqplot.min.js" />
+	<script src="ext/jqplot.categoryAxisRenderer.min.js" />
+	<script src="ext/jqplot.dateAxisRenderer.min.js" />
+	<script src="ext/jqplot.canvasTextRenderer.min.js" />
+	<script src="ext/jqplot.canvasAxisTickRenderer.min.js" />
+	<script src="ext/jqplot.barRenderer.min.js" />	
+</package>

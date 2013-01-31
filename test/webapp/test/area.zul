@@ -1,0 +1,32 @@
+<zk xmlns:n="native">
+	<n:div id="chart">
+	</n:div>
+
+	<script type="text/javascript">
+		zk.afterMount(function() { 
+			
+			var l2 = [11, 9, 5, 12, 14];
+    		var l3 = [4, 8, 5, 3, 6];
+    		var l4 = [12, 6, 13, 11, 2];    
+			
+			//var chart = jq("$chart");
+			
+			var plot1b = $.jqplot('chart',[l2, l3, l4],{
+		       stackSeries: true,
+		       showMarker: false,
+		       seriesDefaults: {
+		           fill: true
+		       },
+		       axes: {
+		           xaxis: {
+		               renderer: $.jqplot.CategoryAxisRenderer,
+		               ticks: ["Mon", "Tue", "Wed", "Thr", "Fri"]
+		           }
+		       }
+		    });
+			
+			//console.log(zk.Widget.$(jq("$myLabel")).getValue());
+		
+		 });
+	</script>
+</zk>
