@@ -18,6 +18,6 @@
 
 	<library-property>
 		<name>org.zkoss.zk.WPD.cache</name>
-		<value>false</value>
+		<value>false</value>		
 	</library-property>
 </zk>

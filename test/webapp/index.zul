@@ -1,14 +1,22 @@
-<jqplot id="linechart" title="Line Chart Demo" type="line" width="600px" height="250px">
-	<zscript><![CDATA[
-	CategoryModel catmodel = new SimpleCategoryModel();
-	catmodel.setValue("2001", "Q1", new Integer(20));
-	catmodel.setValue("2001", "Q2", new Integer(35));
-	catmodel.setValue("2001", "Q3", new Integer(40));
-	catmodel.setValue("2001", "Q4", new Integer(55));
-	catmodel.setValue("2002", "Q1", new Integer(40));
-	catmodel.setValue("2002", "Q2", new Integer(60));
-	catmodel.setValue("2002", "Q3", new Integer(70));
-	catmodel.setValue("2002", "Q4", new Integer(90));
-	linechart.setModel(catmodel);
-]]></zscript>
-</jqplot>
+<zk xmlns:n="native">
+	<n:h2>Demo List</n:h2>
+	<n:ul>
+		<n:li>
+			<n:a href="./demo/lineChart.zul">Line Chart</n:a>
+		</n:li>
+		<n:li>
+			<n:a href="./demo/barChart.zul">Bar Chart</n:a>
+		</n:li>
+		<n:li>
+			<n:a href="./demo/areaChart.zul">Area Chart</n:a>
+		</n:li>
+		<n:li>
+			<n:a href="./demo/cursor.zul">Chart with cursor</n:a>
+		</n:li>
+		<n:li>
+			<n:a href="./demo/highlighter.zul">
+				Chart with highlighter
+			</n:a>
+		</n:li>
+	</n:ul>
+</zk>

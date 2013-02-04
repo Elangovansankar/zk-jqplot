@@ -1,0 +1,23 @@
+<zk xmlns:n="native">
+	<n:div id="chart1" style="width:600px; height:250px;">
+	</n:div>
+	
+	<script type="text/javascript">
+		zk.afterMount(function() { 
+			var plot1 = $.jqplot ('chart1', [[3,7,9,1]], {
+				
+				axes : {
+					xaxis : {
+						renderer : $.jqplot.CategoryAxisRenderer,
+						ticks: ['May', 'June', 'July', 'August'],
+					},
+					yaxis : {
+						renderer: $.jqplot.CategoryAxisRenderer,
+						ticks: ['1', '5' , '10', '15'],
+					}
+				},
+				
+			});
+		 });
+	</script>
+</zk>

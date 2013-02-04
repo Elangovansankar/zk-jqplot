@@ -1,0 +1,73 @@
+<zk xmlns:n="native">
+<vbox width="100%" align="center" pack="center">
+<jqplot id="barchart" title="Bar Chart Demo" type="bar" orient="vertical" width="600px" height="250px">
+<zscript><![CDATA[
+	CategoryModel catmodel = new SimpleCategoryModel();
+	catmodel.setValue("2001", "Q1", new Integer(20));
+	catmodel.setValue("2001", "Q2", new Integer(35));
+	catmodel.setValue("2001", "Q3", new Integer(40));
+	catmodel.setValue("2001", "Q4", new Integer(55));
+	catmodel.setValue("2002", "Q1", new Integer(40));
+	catmodel.setValue("2002", "Q2", new Integer(60));
+	catmodel.setValue("2002", "Q3", new Integer(70));
+	catmodel.setValue("2002", "Q4", new Integer(90));                  
+	barchart.setModel(catmodel);
+]]></zscript>
+</jqplot>
+</vbox>
+
+<n:pre style="width: 100%; background-color: #9CC">
+<![CDATA[
+&lt;jqplot id="barchart" title="Bar Chart Demo" type="bar" width="600px" height="250px"&gt;
+&lt;zscript>&lt;![CDATA[
+	CategoryModel catmodel = new SimpleCategoryModel();
+	catmodel.setValue("2001", "Q1", new Integer(20));
+	catmodel.setValue("2001", "Q2", new Integer(35));
+	catmodel.setValue("2001", "Q3", new Integer(40));
+	catmodel.setValue("2001", "Q4", new Integer(55));
+	catmodel.setValue("2002", "Q1", new Integer(40));
+	catmodel.setValue("2002", "Q2", new Integer(60));
+	catmodel.setValue("2002", "Q3", new Integer(70));
+	catmodel.setValue("2002", "Q4", new Integer(90));
+	barchart.setModel(catmodel);
+]]&gt;&lt;/zscript&gt;
+&lt;/jqplot&gt;
+]]>
+</n:pre>
+
+<vbox width="100%" align="center" pack="center">
+<jqplot id="hbarchart" title="Horizontal Bar Chart Demo" type="bar" orient="horizontal" width="600px" height="250px">
+<zscript><![CDATA[
+	catmodel = new SimpleCategoryModel();
+	catmodel.setValue("2001", "Q1", new Integer(20));
+	catmodel.setValue("2001", "Q2", new Integer(35));
+	catmodel.setValue("2001", "Q3", new Integer(40));
+	catmodel.setValue("2001", "Q4", new Integer(55));
+	catmodel.setValue("2002", "Q1", new Integer(40));
+	catmodel.setValue("2002", "Q2", new Integer(60));
+	catmodel.setValue("2002", "Q3", new Integer(70));
+	catmodel.setValue("2002", "Q4", new Integer(90));                  
+	hbarchart.setModel(catmodel);
+]]></zscript>
+</jqplot>
+</vbox>
+
+<n:pre style="width: 100%; background-color: #9CC">
+<![CDATA[
+&lt;jqplot id="hbarchart" title="Horizontal Bar Chart Demo" type="bar" orient="horizontal" width="600px" height="250px"&gt;
+&lt;zscript>&lt;![CDATA[
+	CategoryModel catmodel = new SimpleCategoryModel();
+	catmodel.setValue("2001", "Q1", new Integer(20));
+	catmodel.setValue("2001", "Q2", new Integer(35));
+	catmodel.setValue("2001", "Q3", new Integer(40));
+	catmodel.setValue("2001", "Q4", new Integer(55));
+	catmodel.setValue("2002", "Q1", new Integer(40));
+	catmodel.setValue("2002", "Q2", new Integer(60));
+	catmodel.setValue("2002", "Q3", new Integer(70));
+	catmodel.setValue("2002", "Q4", new Integer(90));
+	hbarchart.setModel(catmodel);
+]]&gt;&lt;/zscript&gt;
+&lt;/jqplot&gt;
+]]>
+</n:pre>
+</zk>

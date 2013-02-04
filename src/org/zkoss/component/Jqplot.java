@@ -30,6 +30,9 @@ public class Jqplot extends Div implements IdSpace {
 	// Optional
 	private String _title;
 	private String _type;
+	private String _orient;
+	private Boolean _highlighter;
+	private Boolean _cursor;
 
 	// super//
 	protected void renderProperties(org.zkoss.zk.ui.sys.ContentRenderer renderer)
@@ -38,6 +41,9 @@ public class Jqplot extends Div implements IdSpace {
 		
 		render(renderer, "type", _type);
 		render(renderer, "title", _title);
+		render(renderer, "orient", _orient);
+		render(renderer, "cursor", _cursor);
+		render(renderer, "highlighter", _highlighter);		
 		render(renderer, "model", getJSONResponse(transferToJSONObject(getModel())));
 		
 		/**
@@ -100,6 +106,30 @@ public class Jqplot extends Div implements IdSpace {
 		this._type = type;
 	}
 	
+	public String getOrient() {
+		return _orient;
+	}
+
+	public void setOrient(String orient) {
+		this._orient = orient;
+	}
+
+	public Boolean getHighlighter() {
+		return _highlighter;
+	}
+
+	public void setHighlighter(Boolean highlighter) {
+		this._highlighter = highlighter;
+	}
+
+	public Boolean getCursor() {
+		return _cursor;
+	}
+
+	public void setCursor(Boolean cursor) {
+		this._cursor = cursor;
+	}
+
 	private List<JSONObject> transferToJSONObject(ChartModel model) {
 		LinkedList<JSONObject> list = new LinkedList<JSONObject>();
 		
