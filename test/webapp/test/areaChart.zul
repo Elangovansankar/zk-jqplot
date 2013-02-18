@@ -1,0 +1,20 @@
+<chart id="areachart" title="Area Chart" width="500" height="250"
+        type="area" threeD="false" fgAlpha="128">
+ 	<attribute name="onClick"><![CDATA[
+        Area area = event.getAreaComponent();
+        if (area != null)
+            alert(""+area.getAttribute("entity")+":"+area.getTooltiptext());
+    ]]></attribute>
+    <zscript><![CDATA[
+        CategoryModel catmodel = new SimpleCategoryModel();
+        catmodel.setValue("2001", "Q1", new Integer(20));
+        catmodel.setValue("2001", "Q2", new Integer(35));
+        catmodel.setValue("2001", "Q3", new Integer(40));
+        catmodel.setValue("2001", "Q4", new Integer(55));
+        catmodel.setValue("2002", "Q1", new Integer(40));
+        catmodel.setValue("2002", "Q2", new Integer(60));
+        catmodel.setValue("2002", "Q3", new Integer(70));
+        catmodel.setValue("2002", "Q4", new Integer(90));
+        areachart.setModel(catmodel);
+    ]]></zscript>
+</chart>

@@ -1,6 +1,12 @@
 <zk xmlns:n="native">
 <vbox width="100%" align="center" pack="center">
 <jqplot id="areachart" title="Area Chart Demo" type="area" orient="vertical" width="600px" height="250px">
+<attribute name="onClick">
+<![CDATA[
+	Map map = event.getData();
+	alert("seriesIndex:" + map.get("seriesIndex"));
+]]>
+</attribute>
 	<zscript><![CDATA[
 	CategoryModel catmodel = new SimpleCategoryModel();
 	catmodel.setValue("2001", "Q1", new Integer(20));

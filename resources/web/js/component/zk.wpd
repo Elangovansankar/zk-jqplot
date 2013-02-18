@@ -10,6 +10,8 @@
 	<script src="ext/jqplot.canvasAxisTickRenderer.min.js" />
 	<script src="ext/jqplot.cursor.min.js" />
 	<script src="ext/jqplot.dateAxisRenderer.min.js" />
+	<script src="ext/jqplot.donutRenderer.min.js" />
 	<script src="ext/jqplot.highlighter.min.js" />
 	<script src="ext/jqplot.json2.min.js" />
+	<script src="ext/jqplot.pieRenderer.min.js" />
 </package>

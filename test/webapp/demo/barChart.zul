@@ -1,6 +1,13 @@
 <zk xmlns:n="native">
 <vbox width="100%" align="center" pack="center">
 <jqplot id="barchart" title="Bar Chart Demo" type="bar" orient="vertical" width="600px" height="250px">
+<attribute name="onClick">
+<![CDATA[
+	Map map = event.getData();
+	List data = map.get("data");
+	alert("seriesIndex:" + map.get("seriesIndex") + " category:" + data.get(0) + " value:" + data.get(1));
+]]>
+</attribute>
 <zscript><![CDATA[
 	CategoryModel catmodel = new SimpleCategoryModel();
 	catmodel.setValue("2001", "Q1", new Integer(20));

@@ -13,7 +13,7 @@
 		<commons-logging.version>1.1.1</commons-logging.version>
 		<servlet.version>2.4</servlet.version>
 		<jgroovy.version>1.5.6</jgroovy.version>
-		<zk.version>5.0.10</zk.version>
+		<zk.version>6.5.1.1</zk.version>
 	</properties>
 	<version>0.8.0</version>
 	<licenses>
@@ -64,11 +64,13 @@
 		</pluginRepository>
 	</pluginRepositories>
 	<dependencies>
+		<!--
 		<dependency>
 			<groupId>org.zkoss.theme</groupId>
 			<artifactId>breeze</artifactId>
-			<version>${zk.version}</version>
+			<version>5.0.10</version>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
 			<artifactId>zhtml</artifactId>
@@ -87,7 +89,7 @@
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
 			<artifactId>zkbind</artifactId>
-			<version>6.0.0</version>
+			<version>6.5.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>

@@ -18,5 +18,11 @@
 				Chart with highlighter
 			</n:a>
 		</n:li>
+		<n:li>
+			<n:a href="./demo/piechart.zul">Pie Chart Demo</n:a>
+		</n:li>
+		<n:li>
+			<n:a href="./demo/refresh.zul">Type Change Demo</n:a>
+		</n:li>		
 	</n:ul>
 </zk>

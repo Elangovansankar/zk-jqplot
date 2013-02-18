@@ -1,21 +1,29 @@
 package org.zkoss.component;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.zkoss.json.JSONArray;
 import org.zkoss.json.JSONObject;
-import org.zkoss.zk.ui.IdSpace;
+import org.zkoss.zk.au.AuRequest;
+import org.zkoss.zk.ui.HtmlBasedComponent;
+import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.MouseEvent;
+import org.zkoss.zul.Area;
 import org.zkoss.zul.CategoryModel;
 import org.zkoss.zul.ChartModel;
-import org.zkoss.zul.Div;
 import org.zkoss.zul.PieModel;
 import org.zkoss.zul.event.ChartDataEvent;
 import org.zkoss.zul.event.ChartDataListener;
+import org.zkoss.zul.impl.XulElement;
 
-public class Jqplot extends Div implements IdSpace {
+public class Jqplot extends XulElement {
 	/**
 	 * 
 	 */
@@ -33,6 +41,11 @@ public class Jqplot extends Div implements IdSpace {
 	private String _orient;
 	private Boolean _highlighter;
 	private Boolean _cursor;
+	
+	// Event Listener
+	static {
+        addClientEvent(Jqplot.class, Events.ON_CLICK, CE_IMPORTANT);
+    }	
 
 	// super//
 	protected void renderProperties(org.zkoss.zk.ui.sys.ContentRenderer renderer)
@@ -58,17 +71,35 @@ public class Jqplot extends Div implements IdSpace {
 		 */
 	}
 	
+	public void service(AuRequest request, boolean everError) {
+		
+		System.out.println("EVENT FIRED : " + request.getCommand());
+		
+		if (Events.ON_CLICK.equals(request.getCommand())){
+			MouseEvent evt = MouseEvent.getMouseEvent(request);
+//			System.out.println(request.getData().get("seriesIndex"));
+//			System.out.println(request.getData().get("pointIndex"));
+//			System.out.println(request.getData().get("data"));
+//			System.out.println(request.getData().get("data").getClass());
+			
+			//JSONArray data = (JSONArray) request.getData().get("data");
+			//Area area = new Area();
+			//area.setTooltiptext("");
+			//area.setAttribute("entity", value);
+			Events.postEvent("onClick", this, request.getData());
+				
+			//Events.postEvent(evt);
+		} else {
+			super.service(request, everError);
+		}
+	}
+	
 	private class DefaultChartDataListener implements ChartDataListener, Serializable {
 		private static final long serialVersionUID = 20091125153002L;
 
 		public void onChange(ChartDataEvent event) {
-			refresh();
+			invalidate(); // Force redraw
 		}
-	}
-	
-	private void refresh() {
-		System.out.println("refresh");
-		smartUpdate("refresh", getJSONResponse(transferToJSONObject(getModel())));
 	}
 
 	public ChartModel getModel() {
@@ -104,6 +135,8 @@ public class Jqplot extends Div implements IdSpace {
 
 	public void setType(String type) {
 		this._type = type;
+		smartUpdate("type", _type);
+		invalidate(); // Always redraw
 	}
 	
 	public String getOrient() {
@@ -211,4 +244,5 @@ public class Jqplot extends Div implements IdSpace {
 	public String getZclass() {
 		return (this._zclass != null ? this._zclass : "z-jqplot");
 	}
+	
 }

@@ -4,6 +4,8 @@
 	
 	<script type="text/javascript">
 		zk.afterMount(function() { 
+			var ticks = ['Q1', 'Q2', 'Q3', 'Q4'];
+			
 			var plot2 = $.jqplot('chart1', [
 		        [[2, 1], [3, 2], [4, 3], [5, 4]],
 		        ], {
@@ -18,10 +20,16 @@
 		        axes: {
 		            yaxis: {
 		                renderer: $.jqplot.CategoryAxisRenderer,
-		                ticks : [ 'Q1' , 'Q2', 'Q3', 'Q4'], 
+		                ticks : ticks, 
 		            }
 		        }
 		    });
+		    
+			$('#chart1').bind('jqplotDataClick', 
+	            function (ev, seriesIndex, pointIndex, data) {
+	            	alert(seriesIndex + ',' + data);
+	            }
+	        );
 		 });
 	</script>
 </zk>
