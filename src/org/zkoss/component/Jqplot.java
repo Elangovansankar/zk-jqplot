@@ -73,19 +73,15 @@ public class Jqplot extends XulElement {
 	
 	public void service(AuRequest request, boolean everError) {
 		
-		System.out.println("EVENT FIRED : " + request.getCommand());
+//		System.out.println("EVENT FIRED : " + request.getCommand());
 		
 		if (Events.ON_CLICK.equals(request.getCommand())){
 			MouseEvent evt = MouseEvent.getMouseEvent(request);
+			
 //			System.out.println(request.getData().get("seriesIndex"));
 //			System.out.println(request.getData().get("pointIndex"));
 //			System.out.println(request.getData().get("data"));
-//			System.out.println(request.getData().get("data").getClass());
 			
-			//JSONArray data = (JSONArray) request.getData().get("data");
-			//Area area = new Area();
-			//area.setTooltiptext("");
-			//area.setAttribute("entity", value);
 			Events.postEvent("onClick", this, request.getData());
 				
 			//Events.postEvent(evt);

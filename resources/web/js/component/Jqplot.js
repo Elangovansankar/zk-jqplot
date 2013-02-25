@@ -1,70 +1,43 @@
 (function() {
 
 	zk.afterMount(function() {
-
 	});
 
 	var Jqplot = component.Jqplot = zk.$extends(zk.Widget,
 			{
 
-				_title : '', // default value for title attribute
-				_type : 'line', // default value for chart type
+				_title : '',
+				_type : 'line',
 				_orient: 'vertical',
-				_model : null,
+				
 				_cursor : false,
 				_highlighter : false,
-
+				_stackSeries : false,
+				
 				$define : {
-					title : function() {
-						if (this.desktop) {
-						}
-					},
-
-					type : function() {
-						if (this.desktop) {
-							zk.log("setType", this);
-						}
-					},
+					title: null,
+					type: null,
 					
-					orient : function() {
-						
-					},
-					
-					cursor : function() {
-						
-					},
-					
-					highlighter : function() {
-						
-					},
-
-					model : function() {
-						if (this.desktop) {
-							zk.log('setModel', this);
-						}
-					},
+					model : null,
 					series : null,
+					seriesData : null,
+					seriesDefaults : null,
+					axes : null,
+					ticks : null,
+					
+					orient : null,				
 				},
-
-				bind_ : function() {
-					
-					this.$supers(component.Jqplot, 'bind_', arguments);
-					
+				
+				_dataPrepare : function() {
 					var dataModel = this.getModel();
 					var data = jq.evalJSON(dataModel);
-
-					// define plot
-					var series = []; // series label
-					var seriesData = []; // series data value
-					var axes = {}; // axes setting
-					var ticks = []; // label for x-axis or y-axis 
-					var seriesDefaults = {}; // how do we render chart
-					var stackSeries = false; // stack chart
-					var cursor = { show : false};
-					var highlighter = { show : false};
 					
-					// Step 1. Parse JSON data into jqplot format
-					if( this._type == 'pie') {
+					// In this phase, we need to decide following variables
+					var seriesData = [];
+					var ticks = [];
+					
+					// Start data prepare
+					if( this.getType() == 'pie') {
 						
 						for ( var i = 0, len = data.length; i < len; i++) {
 							
@@ -80,7 +53,7 @@
 							var current = data[i];
 	
 							var count = 0;
-							for (key in current) { 
+							for (var key in current) { 
 								
 								if (key == 'values') { // Ticks
 									ticks.push(current.values); // Q2, Q3, Q4
@@ -104,10 +77,21 @@
 							}
 						}
 					}
-					// End Step 1.		
+					// End data prepare
 					
-					// Step 2. Decide which type chart should be plot.
+					this.setSeriesData(seriesData);
+					this.setTicks(ticks);
 					
+				},
+				
+				_chartPrepare : function() {
+					
+					var wgt = this;
+					// In this phase, we need to decide following variables
+					var axes = {};
+					var seriesDefaults = {};
+					
+					// Start chart prepare
 					if(this.isBarType()) {
 						
 						// Bar
@@ -115,17 +99,17 @@
 						if(this._orient == 'horizontal') {
 							seriesDefaults.rendererOptions = {
 								fillToZero : true,
-								barDirection: 'horizontal',
+								barDirection: 'horizontal'
 							};
 						}
 						
 						// Stack
 						if(this._type == 'stacked_bar') {
-							stackSeries = true;
+							this._stackSeries = true;
 						}
 						
 					} else if(this.getType() == 'area') {
-						stackSeries = true;
+						this.stackSeries = true;
 						seriesDefaults.fill = true;
 					} else if(this.getType() == 'pie') {
 						seriesDefaults = {
@@ -134,16 +118,15 @@
 									showDataLabels: true
 								}
 						};
-						axesDefaults = null;
 					}
 					
 					// Horizontal or Vertical ?
-					if(this.getType() != 'pie')
+					if(this.getType() != 'pie') {
 						if(this._orient != 'horizontal') {
 							// Vertical
 							axes.xaxis = {
 								renderer : $.jqplot.CategoryAxisRenderer,
-								ticks: ticks,					
+								ticks: wgt.getTicks(),
 							};
 							axes.yaxis = { autoscale : true};				
 						} else {
@@ -151,48 +134,50 @@
 							axes.xaxis = { autoscale : true };
 							axes.yaxis = {
 								renderer : $.jqplot.CategoryAxisRenderer,
-								ticks: ticks
+								ticks: wgt.getTicks(),
 							};
 						}
-					
-					// Options
-					if(this._cursor) {
-						cursor = {
-							show: true,
-							tooltipLocation:'sw'
-						};
 					}
 					
-					if(this._highlighter) {
-						highlighter = {
-							show: true,
-						    sizeAdjust: 7.5
-						}
-					}
+					// End chart prepare
 					
-					// End Step 2
-					
-					// Step 3. Plot
+					this.setAxes(axes);
+					this.setSeriesDefaults(seriesDefaults);
+				},
+				
+				_chartPlot : function() {
 					var wgt = this;
-				    
-					var jqplot = $.jqplot(this.$n('chart').id, seriesData, {
+					var jqplot = $.jqplot(this.$n('chart').id, wgt.getSeriesData(), {
 						title : wgt.getTitle(),
-						series: series,
-						stackSeries: stackSeries,					
-						seriesDefaults : seriesDefaults,
+						stackSeries: wgt._stackSeries,
+						seriesDefaults : wgt.getSeriesDefaults(),
 						axesDefaults : {
-							tickRenderer : $.jqplot.CanvasAxisTickRenderer,
+							tickRenderer : $.jqplot.CanvasAxisTickRenderer
 						},
-						axes : axes,
+						axes : wgt.getAxes(),
 						legend: {
 				            show: true,
 				            placement: 'outsideGrid'
 				        },
-				        cursor: cursor,
-				        highlighter: highlighter,
+				        cursor: wgt.getCursor(),
+				        highlighter: wgt.getHighlighter()
 					});
-					// End Step 3.
+				},
+
+				bind_ : function() {
 					
+					this.$supers(component.Jqplot, 'bind_', arguments);
+					
+					// Step 1
+					this._dataPrepare();	
+					
+					// Step 2
+					this._chartPrepare();
+					
+					// Step 3
+					this._chartPlot();
+					
+					var wgt = this;
 					// Listen onClick
 					if(this.isListen("onClick")) {
 						var _seriesIndex, _pointIndex, _data;
@@ -205,7 +190,7 @@
 									seriesIndex : _seriesIndex,
 									pointIndex : _pointIndex,
 									data : _data,
-									ticks : ticks
+									ticks : wgt.getTicks()
 								});
 							}
 						);
@@ -217,15 +202,36 @@
 					this.$supers(component.Jqplot, 'unbind_', arguments);
 				},
 				
-				setRefresh : function() {
-					zk.log("setRefresh", this);
-				},
 				
 				isBarType : function() {
 					if(this._type == 'bar' || this._type == 'stacked_bar') {
 						return true;
 					}
 					return false;
+				},				
+				
+				getCursor : function() {
+					if(this._cursor) {
+						return { show: true, tooltipLocation:'sw' };						
+					} else {
+						return { show: false };
+					}
+				},
+				
+				setCursor : function(val) {
+					this._cursor = val; 
+				},
+				
+				getHighlighter : function() {
+					if(this._highlighter) {
+						return { show: true, sizeAdjust: 7.5 };
+					} else {
+						return { show: false };
+					}
+				},
+				
+				setHighlighter : function(val) {
+					this._highlighter = val; 
 				},
 
 				getZclass : function() {
