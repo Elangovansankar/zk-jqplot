@@ -25,7 +25,7 @@
 					axes : null,
 					ticks : null,
 					
-					orient : null,				
+					orient : null				
 				},
 				
 				_dataPrepare : function() {
@@ -126,7 +126,7 @@
 							// Vertical
 							axes.xaxis = {
 								renderer : $.jqplot.CategoryAxisRenderer,
-								ticks: wgt.getTicks(),
+								ticks: wgt.getTicks()
 							};
 							axes.yaxis = { autoscale : true};				
 						} else {
@@ -134,7 +134,7 @@
 							axes.xaxis = { autoscale : true };
 							axes.yaxis = {
 								renderer : $.jqplot.CategoryAxisRenderer,
-								ticks: wgt.getTicks(),
+								ticks: wgt.getTicks()
 							};
 						}
 					}
