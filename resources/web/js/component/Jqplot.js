@@ -181,7 +181,7 @@
 					// Listen onClick
 					if(this.isListen("onClick")) {
 						var _seriesIndex, _pointIndex, _data;
-						jq('#' + this.$n().id).bind('jqplotDataClick', 
+						jq(this).bind('jqplotDataClick', 
 							function (ev, seriesIndex, pointIndex, data, plot) {
 								_seriesIndex = seriesIndex;
 								_pointIndex = pointIndex;
