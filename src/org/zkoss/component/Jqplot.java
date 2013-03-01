@@ -37,7 +37,7 @@ public class Jqplot extends XulElement {
 
 	// Optional
 	private String _title = "";
-	private String _type = "pie";
+	private String _type = "line";
 	private String _orient = "vertical";
 	private Boolean _highlighter = false;
 	private Boolean _cursor = false;
