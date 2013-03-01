@@ -147,7 +147,7 @@
 				
 				_chartPlot : function() {
 					var wgt = this;
-					$.jqplot(this.$n('chart').id, wgt.getSeriesData(), {
+					$.jqplot(this.$n().id, wgt.getSeriesData(), {
 						title : wgt.getTitle(),
 						stackSeries: wgt._stackSeries,
 						seriesDefaults : wgt.getSeriesDefaults(),
@@ -181,7 +181,7 @@
 					// Listen onClick
 					if(this.isListen("onClick")) {
 						var _seriesIndex, _pointIndex, _data;
-						$('#' + this.$n('chart').id).bind('jqplotDataClick', 
+						jq('#' + this.$n().id).bind('jqplotDataClick', 
 							function (ev, seriesIndex, pointIndex, data, plot) {
 								_seriesIndex = seriesIndex;
 								_pointIndex = pointIndex;
@@ -202,6 +202,9 @@
 					this.$supers(component.Jqplot, 'unbind_', arguments);
 				},
 				
+				doClick_ : function() {
+					// Override
+				},
 				
 				isBarType : function() {
 					return this._type == 'bar' || this._type == 'stacked_bar';
