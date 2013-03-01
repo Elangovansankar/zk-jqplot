@@ -36,11 +36,11 @@ public class Jqplot extends XulElement {
 	private LinkedList<JSONObject> _seriesList;
 
 	// Optional
-	private String _title;
-	private String _type;
-	private String _orient;
-	private Boolean _highlighter;
-	private Boolean _cursor;
+	private String _title = "";
+	private String _type = "pie";
+	private String _orient = "vertical";
+	private Boolean _highlighter = false;
+	private Boolean _cursor = false;
 	
 	// Event Listener
 	static {
@@ -73,18 +73,10 @@ public class Jqplot extends XulElement {
 	
 	public void service(AuRequest request, boolean everError) {
 		
-//		System.out.println("EVENT FIRED : " + request.getCommand());
-		
-		if (Events.ON_CLICK.equals(request.getCommand())){
-			MouseEvent evt = MouseEvent.getMouseEvent(request);
-			
-//			System.out.println(request.getData().get("seriesIndex"));
-//			System.out.println(request.getData().get("pointIndex"));
-//			System.out.println(request.getData().get("data"));
+		if (Events.ON_CLICK.equals(request.getCommand())) {
 			
 			Events.postEvent("onClick", this, request.getData());
-				
-			//Events.postEvent(evt);
+			
 		} else {
 			super.service(request, everError);
 		}
@@ -122,7 +114,11 @@ public class Jqplot extends XulElement {
 	}
 
 	public void setTitle(String title) {
-		this._title = title;
+		if(!title.equals(this._title)) {
+			this._title = title;
+			smartUpdate("title", _title);
+			invalidate();
+		}
 	}
 
 	public String getType() {
@@ -130,9 +126,11 @@ public class Jqplot extends XulElement {
 	}
 
 	public void setType(String type) {
-		this._type = type;
-		smartUpdate("type", _type);
-		invalidate(); // Always redraw
+		if(!type.equals(this._type)) {
+			this._type = type;
+			smartUpdate("type", _type);
+			invalidate(); // Always redraw
+		}
 	}
 	
 	public String getOrient() {
@@ -140,7 +138,11 @@ public class Jqplot extends XulElement {
 	}
 
 	public void setOrient(String orient) {
-		this._orient = orient;
+		if(!orient.equals(this._orient)) {
+			this._orient = orient;
+			smartUpdate("orient", _orient);
+			invalidate();
+		}
 	}
 
 	public Boolean getHighlighter() {
@@ -148,7 +150,11 @@ public class Jqplot extends XulElement {
 	}
 
 	public void setHighlighter(Boolean highlighter) {
-		this._highlighter = highlighter;
+		if(highlighter != this._highlighter) {
+			this._highlighter = highlighter;
+			smartUpdate("hightlighter", _highlighter);
+			invalidate();
+		}
 	}
 
 	public Boolean getCursor() {
@@ -156,7 +162,11 @@ public class Jqplot extends XulElement {
 	}
 
 	public void setCursor(Boolean cursor) {
-		this._cursor = cursor;
+		if(cursor != this._cursor) {
+			this._cursor = cursor;
+			smartUpdate("cursor", _cursor);
+			invalidate();
+		}
 	}
 
 	private List<JSONObject> transferToJSONObject(ChartModel model) {

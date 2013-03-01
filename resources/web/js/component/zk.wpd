@@ -4,9 +4,7 @@
 	
 	<script src="ext/jquery.jqplot.min.js" />
 	
-	<script src="ext/excanvas.min.js" browser="ie6-"/>
-	<script src="ext/excanvas.min.js" browser="ie7-"/>
-	<script src="ext/excanvas.min.js" browser="ie8-"/>
+	<script src="ext/excanvas.min.js" browser="ie6-,ie7-,ie8-"/>
 	
 	<script src="ext/jqplot.barRenderer.min.js" />
 	<script src="ext/jqplot.categoryAxisRenderer.min.js" />

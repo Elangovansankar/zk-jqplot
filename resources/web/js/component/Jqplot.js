@@ -1,8 +1,5 @@
 (function() {
 
-	zk.afterMount(function() {
-	});
-
 	var Jqplot = component.Jqplot = zk.$extends(zk.Widget,
 			{
 
@@ -17,6 +14,9 @@
 				$define : {
 					title: null,
 					type: null,
+					
+					width: null,
+					height: null,
 					
 					model : null,
 					series : null,
@@ -147,7 +147,7 @@
 				
 				_chartPlot : function() {
 					var wgt = this;
-					var jqplot = $.jqplot(this.$n('chart').id, wgt.getSeriesData(), {
+					$.jqplot(this.$n('chart').id, wgt.getSeriesData(), {
 						title : wgt.getTitle(),
 						stackSeries: wgt._stackSeries,
 						seriesDefaults : wgt.getSeriesDefaults(),
@@ -204,11 +204,8 @@
 				
 				
 				isBarType : function() {
-					if(this._type == 'bar' || this._type == 'stacked_bar') {
-						return true;
-					}
-					return false;
-				},				
+					return this._type == 'bar' || this._type == 'stacked_bar';
+				},
 				
 				getCursor : function() {
 					if(this._cursor) {
