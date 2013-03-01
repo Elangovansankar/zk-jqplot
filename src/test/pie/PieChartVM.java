@@ -1,4 +1,4 @@
-package org.zkoss.test.pie;
+package test.pie;
 
 import java.util.List;
 import java.util.Map;

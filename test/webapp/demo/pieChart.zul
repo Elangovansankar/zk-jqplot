@@ -1,6 +1,6 @@
 <zk xmlns:n="native" xmlns:w="client">
 	<hlayout width="100%" apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('org.zkoss.test.pie.PieChartVM')">
+		viewModel="@id('vm') @init('test.pie.PieChartVM')">
 		<jqplot id="piechart" title="Pie Chart Demo" type="pie"
 			width="600px" height="250px" model="@bind(vm.model)"
 			onClick="@command('dataOnClick', event=event)">
