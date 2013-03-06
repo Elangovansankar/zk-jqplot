@@ -1,0 +1,4 @@
+<zk>
+<jqplot title="Area Chart Demo" type="area" orient="vertical" width="600px" height="250px">
+</jqplot>
+</zk>

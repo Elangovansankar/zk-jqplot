@@ -1,0 +1,22 @@
+<language-addon>
+    <addon-name>jqplot</addon-name>
+    <depends>zul</depends>
+  	<version>
+		<version-class>org.zkoss.jqplot.Version</version-class>
+		<version-uid>0.0.1-SNAPSHOT</version-uid>
+		<zk-version>6.0.1</zk-version><!-- or later -->
+	</version>
+    
+	<language-name>xul/html</language-name>
+	<component>
+		<component-name>jqplot</component-name> <!-- required -->
+		<component-class>org.zkoss.zul.Jqplot</component-class> <!-- required -->
+		<widget-class>zul.jqplot.Jqplot</widget-class> <!-- required -->
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>mold/jqplot.js</mold-uri>
+		</mold>
+	</component>
+	
+	<stylesheet href="~./js/zul/jqplot/ext/jquery.jqplot.css" type="text/css"/>
+</language-addon>

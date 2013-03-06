@@ -1,0 +1,53 @@
+<zk xmlns:n="native" xmlns:w="client">
+	<hlayout width="100%" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('test.ctrl.PieChartVM')">
+		<jqplot id="piechart" title="Pie Chart Demo" type="pie"
+			width="600px" height="250px" model="@bind(vm.model)">
+			<!-- Retrieve Event Object from ZUL is ZK EE Only!! -->
+			<!--
+				onClick="@command('dataOnClick', event=event)"
+			-->
+			
+			<attribute name="onClick">
+			<![CDATA[
+				Map map = (Map) event.getData();
+				List data = (List) map.get("data");
+				if (data != null)
+					alert("" + data.get(0) + ":" + data.get(1));
+			]]>
+			</attribute>
+		</jqplot>
+		<grid width="100%">
+			<columns>
+				<column label="Category" width="90px" />
+				<column label="Value" width="90px" />
+			</columns>
+			<rows>
+				<row>
+					<label value="C/C++" />
+					<doublebox value="@bind(vm.value1)"
+						constraint="no empty" width="70px"
+						onChange="@global-command('dataChanged', category='C/C++', num=vm.value1)" />
+				</row>
+				<row>
+					<label value="VB" />
+					<doublebox value="@bind(vm.value2)"
+						constraint="no empty" width="70px"
+						onChange="@global-command('dataChanged', category='VB', num=vm.value2)" />
+				</row>
+				<row>
+					<label value="Java" />
+					<doublebox value="@bind(vm.value3)"
+						constraint="no empty" width="70px"
+						onChange="@global-command('dataChanged', category='Java', num=vm.value3)" />
+				</row>
+				<row>
+					<label value="PHP" />
+					<doublebox value="@bind(vm.value4)"
+						constraint="no empty" width="70px"
+						onChange="@global-command('dataChanged', category='PHP', num=vm.value4)" />
+				</row>
+			</rows>
+		</grid>
+	</hlayout>
+</zk>
