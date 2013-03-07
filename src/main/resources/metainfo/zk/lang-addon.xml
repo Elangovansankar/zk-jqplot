@@ -3,7 +3,7 @@
     <depends>zul</depends>
   	<version>
 		<version-class>org.zkoss.jqplot.Version</version-class>
-		<version-uid>0.0.1-SNAPSHOT</version-uid>
+		<version-uid>0.8.0</version-uid>
 		<zk-version>6.0.1</zk-version><!-- or later -->
 	</version>
     
